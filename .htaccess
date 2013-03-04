@@ -1,0 +1,10 @@
+RewriteEngine On
+
+RewriteBase /api/
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /api/index.php [L]
+
+#RewriteRule ^/api/newsfeed/$ /api/?action=newsfeed/ [R]
+#RewriteRule ^/api/post/(.+)$ /api/?action=postShow&id=$1/ [R]

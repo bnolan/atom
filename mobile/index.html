@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Atom Project</title>
+
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Set Apple icons for when prototype is saved to home screen -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="touch-icons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="touch-icons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="touch-icons/apple-touch-icon-57x57.png">
+
+    <!-- Include the compiled Ratchet CSS -->
+    <link rel="stylesheet" href="ratchet.css">
+    <link rel="stylesheet" href="mobile.css">
+
+    <!-- Include the compiled Ratchet JS -->
+    <script src="lib/ratchet.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/underscore.js"></script>
+    <script src="lib/backbone.js"></script>
+    <script src="lib/linkify.js"></script>
+    <script src="lib/embedly.js"></script>
+    <script src="app/application.js"></script>
+
+    <!-- Intro paragraph styles. Delete once you start using this page -->
+    <style type="text/css">
+        .welcome {
+          line-height: 1.5;
+          color: #555;
+        }
+    </style>
+
+    <script id="newsfeed-template" type="text/html">
+      <header class="bar-title">
+        <a class="button" href="#new">Post</a> 
+        <h1 class="title">Newsfeed</h1>
+        <a class="search button" href="#search">Search</a> 
+      </header>
+
+      <div class="content newsfeed">
+        <ul class="list"></ul>
+      </div>
+    </script>
+    
+    <script id="newsfeed-item-template" type="text/html">
+      <li class="newsfeed-item">
+        <a href="#posts/<%= model.id %>">
+
+        <span class="user">
+          <img class='avatar' src='<%= model.getUser().getAvatar() %>' />
+          <b><%= model.getUser().escape('name') %></b>
+          <p class="meta"><%= model.escape('created_at') %></p>
+        </span>
+        
+        <strong><%= model.escape('content') %></strong>
+        <span class="chevron"></span>
+        </a>
+      </li>
+    </script>
+    
+    <script id="post-view-template" type="text/html">
+      <header class="bar-title">
+        <a class="back button" href="#">Back</a> 
+        <h1 class="title"><%= model.escape('content').slice(0,15) + "..." %></h1>
+      </header>
+
+      <div class="content post-view">
+        <div class="user">
+          <img class='avatar' src='<%= model.getUser().getAvatar() %>' />
+          <b><%= model.getUser().escape('name') %></b>
+          <p class="meta">
+            Posted <%= model.escape('created_at') %>
+          </p>
+        </div>
+    
+        <div class="post-body">
+          <%= model.escapeAndLinkifyContent() %>
+        </div>
+        
+        <!--form>
+          <textarea placeholder="Write a reply..." rows="5"></textarea>
+          <button class="button button-block" type="submit">Send</button>
+        </form-->        
+      </div>
+    </script>
+
+    <script id="post-new-template" type="text/html">
+      <header class="bar-title">
+        <a class="back button" href="#">Back</a> 
+        <h1 class="title">New Post</h1>
+      </header>
+
+      <div class="content post-new">
+        <div class="user">
+          <img class='avatar' src='<%= model.getAvatar() %>' />
+          <b><%= model.escape('name') %></b>
+          <p class="meta">
+            Not yet posted
+          </p>
+        </div>
+    
+        <form>
+          <textarea placeholder="Write your post..." rows="5"></textarea>
+          <button class="button button-block" type="submit">Send</button>
+        </form>        
+      </div>
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

@@ -1,57 +1,12 @@
 <? 
-	require_once("lib/idiorm.php");
-	require_once("lib/paris.php");
-
-    // Connect to the demo database file
-    ORM::configure('mysql:host=localhost;dbname=atom-dev');
-	ORM::configure('username', 'root');
-
-    $db = ORM::get_db();
-    
-    $db->exec("
-        CREATE TABLE IF NOT EXISTS post (
-            id VARCHAR(64) PRIMARY KEY, 
-            name TEXT, 
-            title TEXT,
-            content TEXT,
-            created_at DATETIME,
-            user_id INTEGER 
-        );
-
-        CREATE TABLE IF NOT EXISTS user (
-            id INTEGER PRIMARY KEY, 
-            name TEXT, 
-            url TEXT,
-            user_id INTEGER 
-        );
-    ");
-
-    class User extends Model{
-	}
-	$Users = Model::factory('User');
-
-    class Post extends Model{
-    	function getUser(){
-    		return Model::factory('User')->find_one();
-    	}
-    }
-	$Posts = Model::factory('Post');
-
-	
-	function uuid(){
-		return uniqid("1234", true);
-	}
-
-	function h($text){
-		echo htmlspecialchars($text);
-	}
-
+  require "bootstrap.inc";
+  
 	if($_REQUEST['content']){
-		// $user = $Users->create();
-		// $user->id = 1;
-		// $user->name = "Ben Nolan";
-		// $user->url = "http://atom.localhost/";
-		// $user->save();
+    // $user = $Users->create();
+    // $user->id = 1;
+    // $user->name = "Ben Nolan";
+    // $user->url = "http://atom.localhost/";
+    // $user->save();
 
 		$post = $Posts->create();
 		$post->content = $_REQUEST['content'];
